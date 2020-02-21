@@ -3,6 +3,8 @@ package jenkins.docker.bootjenkinsdockerintegration;
 import java.util.Arrays;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
@@ -14,8 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class BootJenkinsDockerIntegrationApplication {
 
-	@GetMapping("/message")
+	Logger logger = LoggerFactory.getLogger(BootJenkinsDockerIntegrationApplication.class);
+	
+	@GetMapping("/employees")
 	public ResponseEntity<List<Employee>> getMessage() {
+		
+		logger.info("Rest controller invoked for employees");
+		
 		List<Employee> employees = Arrays.asList(
 				new Employee[] { new Employee(1, "Sudheer"), new Employee(2, "Rani"), new Employee(3, "Sonali") });
 		return new ResponseEntity<List<Employee>>(employees, HttpStatus.OK);
@@ -26,10 +33,14 @@ public class BootJenkinsDockerIntegrationApplication {
 	}
 
 	static class Employee {
+		
+		Logger logger = LoggerFactory.getLogger(Employee.class);
+		
 		int id;
 		String name;
 
 		Employee(int id, String name) {
+			logger.info("Employee "+id+" -- "+name+" is getting created...");
 			this.id = id;
 			this.name = name;
 		}
