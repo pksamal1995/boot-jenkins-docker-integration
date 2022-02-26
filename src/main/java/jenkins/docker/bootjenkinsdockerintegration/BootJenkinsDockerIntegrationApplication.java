@@ -1,6 +1,7 @@
 package jenkins.docker.bootjenkinsdockerintegration;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class BootJenkinsDockerIntegrationApplication {
 	@GetMapping("/employees")
 	public ResponseEntity<List<Employee>> getMessage() {
 		
-		logger.info("Rest controller invoked for employees");
+		logger.info("Rest controller invoked for employees"+ new Date().getTime());
 		
 		List<Employee> employees = Arrays.asList(
 				new Employee[] { new Employee(1, "Sudheer"), new Employee(2, "Rani"), new Employee(3, "Sonali") });
@@ -38,6 +39,22 @@ public class BootJenkinsDockerIntegrationApplication {
 		
 		int id;
 		String name;
+
+		public int getId() {
+			return id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setId(int id) {
+			this.id = id;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
 
 		Employee(int id, String name) {
 			logger.info("Employee "+id+" -- "+name+" is getting created...");
